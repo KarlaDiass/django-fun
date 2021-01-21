@@ -15,8 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
+
+from accounts import views as accounts_views
+from example import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pokemaoc/', include('pokemaoc.urls'))
+    path('pokemaoc/', include('pokemaoc.urls')),
+    url(r'^signup/$', accounts_views.signup, name='signup'),
 ]
+
+
+
+
+
