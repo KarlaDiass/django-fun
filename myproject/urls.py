@@ -21,6 +21,7 @@ from accounts import views as accounts_views
 from example import views
 
 urlpatterns = [
+    url(r"^", include("users.urls")),
     path('admin/', admin.site.urls),
     path('pokemaoc/', include('pokemaoc.urls')),
     url(r'^signup/$', accounts_views.signup, name='signup'),
