@@ -1,0 +1,72 @@
+Atividade (27/01/2021)
+
+-> Todos os artigos de determinado repórter.
+
+filtragem pelo id do reporter:
+comando:
+Article.objects.filter(reporter_id=5)
+resultado:
+<QuerySet [<Article: A linguagem do futuro>]>
+
+filtragem pelo primeiro nome do repórter:
+comando:
+Article.objects.filter(reporter__first_name='Daiane')  
+
+resultado:
+<QuerySet [<Article: Python>]>
+__________________________________________________________
+
+-> Todos os artigos entre 2019-2020
+
+comando:
+Article.objects.filter(pub_date__year__range =[2019, 2020])   
+
+resultado:
+<QuerySet []>
+
+comando com o ano atual, pois todos os artigos estão datados em 2021:
+Article.objects.filter(pub_date__year__range =[2019, 2021])
+
+resultado
+<QuerySet [<Article: A gata Pandora>, <Article: A linguagem do futuro>, <Article: DEV>, <Article: Entra21>, 
+<Article: Prog>, <Article: Python>, <Article: Um dia de chuva>, <Article: oi tudo bem>, <Article: oioi>]>
+__________________________________________________________
+
+-> O reporter com mais artigos em 2020
+
+comando:
+
+__________________________________________________________
+
+-> Artigos que contenham a palavra "Python" e tenham sido publicados por 
+determinado repórter em abril de 2015.
+
+comando:
+Article.objects.filter(headline__contains='Python').filter(reporter_id = 9).filter(pub_date__month = '04', pub_date__year = 2015)  
+
+resultado:
+<QuerySet []>
+
+comando com dados que batem com o artigo que há no meu banco de dados:
+Article.objects.filter(headline__contains='Python').filter(reporter_id = 9).filter(pub_date__month = '01', pub_date__year = 2021)  
+
+resultado:
+<QuerySet [<Article: Python>]>
+__________________________________________________________
+
+-> A quantidade de publicações que contenham a letra "i"
+
+comando:
+Article.objects.filter(headline__contains ='i').count()
+
+resultado:
+4
+
+sem o count():
+
+<QuerySet [<Article: A linguagem do futuro>, <Article: Um dia de chuva>, <Article: oi tudo bem>, <Article: oioi>]>
+__________________________________________________________
+
+-> Média de publicações por artigo
+
+comando:
