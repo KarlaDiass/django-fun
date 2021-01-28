@@ -20,6 +20,7 @@ __________________________________________________________
 
 comando:
 Article.objects.filter(pub_date__year__range =[2019, 2020])   
+obs.: o range funciona como o BETWEEN no sql.
 
 resultado:
 <QuerySet []>
@@ -32,9 +33,13 @@ resultado
 <Article: Prog>, <Article: Python>, <Article: Um dia de chuva>, <Article: oi tudo bem>, <Article: oioi>]>
 __________________________________________________________
 
--> O reporter com mais artigos em 2020
+-> O reporter com mais artigos em 2021
 
 comando:
+Article.objects.filter(pub_date__year = '2021').values("reporter").annotate(count=Count('reporter')).order_by('-count').first()
+
+resultado:
+{'reporter': 1, 'count': 3}
 
 __________________________________________________________
 
@@ -70,3 +75,7 @@ __________________________________________________________
 -> Média de publicações por artigo
 
 comando:
+Publication.objects.count()/Article.objects.count()
+
+resultado:
+1.3333333333333333
